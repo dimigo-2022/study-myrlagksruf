@@ -3,14 +3,38 @@
   const increment = () => {
     count += 2
   }
+
+  let promise = Promise.resolve('');
+
+  let disabled = false;
+
+  async function search(){
+    disabled = true;
+    try{
+      const res = await fetch('https://dummy.in-coding.com/fetch001/champion.html');
+      const txt = res.text();
+      await new Promise(res => setTimeout(res, 3000));
+      disabled = false;
+      return txt;
+    } catch(err){
+      disabled = false;
+      throw err;
+    }
+  }
 </script>
 
 <button on:click={increment}>
   Clicks: {count}
 </button>
-<button on:click={increment}>
-  눌러봐
-</button>
+<button { disabled } on:click={() => promise = search()}>fetch</button>
+{#await promise}
+  <div>loading...</div>  
+{:then value} 
+  <div>{@html value }</div>
+{:catch err}
+  <div>{ err }</div>
+{/await}
+
 
 <style>
   button {
@@ -33,5 +57,9 @@
 
   button:active {
     background-color: rgba(255, 62, 0, 0.2);
+  }
+  button:disabled{
+    background-color: rgb(80, 80, 80);
+    color:gray;
   }
 </style>
