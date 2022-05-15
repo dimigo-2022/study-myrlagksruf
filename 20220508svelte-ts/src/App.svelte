@@ -1,23 +1,11 @@
 <script lang="ts">
-  import logo from './assets/svelte.png'
-  import Counter from './lib/Counter.svelte'
+  import Clock from './lib/Clock.svelte';
+  import Test1 from './lib/test1.svelte';
 </script>
 
 <main>
-  <img src={logo} alt="Svelte Logo" />
-  <h1>Hello Typescript!</h1>
-
-  <Counter /> <Counter />
-
-  <p>
-    Visit <a href="https://svelte.dev">svelte.dev</a> to learn how to build Svelte
-    apps.
-  </p>
-
-  <p>
-    Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
-    the officially supported framework, also powered by Vite!
-  </p>
+  <Test1 />
+  <Clock --size="400px"/>
 </main>
 
 <style lang="scss" scoped>
@@ -45,6 +33,7 @@
       margin: 2rem auto;
       max-width: 14rem;
     }
+    
     p {
       max-width: 14rem;
       margin: 1rem auto;
@@ -62,3 +51,33 @@
     }
   }
 </style>
+
+<svelte:head>
+  <style>
+    button {
+      font-family: inherit;
+      font-size: inherit;
+      padding: 1em 2em;
+      color: #ff3e00;
+      background-color: rgba(255, 62, 0, 0.1);
+      border-radius: 2em;
+      border: 2px solid rgba(255, 62, 0, 0);
+      outline: none;
+      width: 200px;
+      font-variant-numeric: tabular-nums;
+      cursor: pointer;
+    }
+  
+    button:focus {
+      border: 2px solid #ff3e00;
+    }
+  
+    button:active {
+      background-color: rgba(255, 62, 0, 0.2);
+    }
+    button:disabled{
+      background-color: rgb(80, 80, 80);
+      color:gray;
+    }
+  </style>  
+</svelte:head>
