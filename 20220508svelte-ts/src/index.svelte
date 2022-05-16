@@ -1,11 +1,46 @@
 <script lang="ts">
   import Clock from './lib/Clock.svelte';
+  import Counter from './lib/Counter.svelte';
   import Test1 from './lib/test1.svelte';
-</script>
 
+  const arr = [{
+    Tar:Clock,
+    props:{
+      size:'400px'
+    },
+    hash:'#clock'
+  }, {
+    Tar:Test1,
+    hash:'#test1'
+  }, {
+    Tar: Counter,
+    hash:'#counter'
+  }]
+  
+  let hash = '';
+  $:{
+    location.hash = hash;
+  }
+
+  const clickEvent = (e:MouseEvent) => {
+    const tar = e.target;
+    if(tar instanceof HTMLButtonElement){
+      hash = tar.dataset.hash;
+    }
+  };
+</script>
+<header>
+  {#each arr as {hash:h}}
+    <button class="hash {h === hash ? 'active' : ''}" data-hash={h} on:click={clickEvent}>{h.slice(1)}</button>
+  {/each}
+</header>
+<a href="/lib">테스트</a>
 <main>
-  <Test1 />
-  <Clock --size="400px"/>
+  {#each arr as {Tar, props, hash:h}}
+    {#if h === hash}
+      <Tar {...props}/>
+    {/if}
+  {/each}
 </main>
 
 <style lang="scss" scoped>
@@ -14,8 +49,21 @@
       Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   }
 
+  :global(body){
+    margin: 0;
+  }
+
+  header {
+    background-color: ghostwhite;
+    padding: 10px;
+    border:3px solid black;
+    display: flex;
+    justify-content: center;
+  }
+
   main {
-    text-align: center;
+    display: flex;
+    justify-content: center;
     padding: 1em;
     margin: 0 auto;
 
@@ -53,6 +101,7 @@
 </style>
 
 <svelte:head>
+  <title>시발?</title>
   <style>
     button {
       font-family: inherit;
@@ -67,13 +116,17 @@
       font-variant-numeric: tabular-nums;
       cursor: pointer;
     }
+
+    button:hover{
+      background-color: rgba(255, 62, 0, 0.2);
+    }
   
     button:focus {
       border: 2px solid #ff3e00;
     }
   
-    button:active {
-      background-color: rgba(255, 62, 0, 0.2);
+    button:active, button.active {
+      background-color: rgba(255, 62, 0, 0.4);
     }
     button:disabled{
       background-color: rgb(80, 80, 80);

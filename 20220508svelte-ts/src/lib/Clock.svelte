@@ -4,6 +4,7 @@
     let second:number;
     let minute:number;
     let hour:number;
+    export let size:string;
     const arr = new Array(12).fill(0);
     $:{
         ms = time.getMilliseconds();
@@ -20,7 +21,7 @@
     main();
 </script>
 
-<main>
+<main style="--size:{size}">
     <div class="second" style={`transform:translateX(-50%) rotate(${(second * 6 + ms * 6 / 1000).toFixed(2)}deg)`}></div>
     <div class="minute" style={`transform:translateX(-50%) rotate(${(minute * 6 + second / 10 + ms / 10000).toFixed(2)}deg)`}></div>
     <div class="hour" style={`transform:translateX(-50%) rotate(${(hour * 30 + minute / 2 + second / 120 + ms / 120000).toFixed(2)}deg)`}></div>

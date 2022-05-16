@@ -22,15 +22,16 @@
     }
   }
 </script>
-
-<button on:click={increment}>
-  Clicks: {count}
-</button>
-<button { disabled } on:click={() => promise = search()}>fetch</button>
-{#await promise}
-  <div>loading...</div>  
-{:then value} 
-  <div>{@html value }</div>
-{:catch err}
-  <div>{ err }</div>
-{/await}
+<main>
+  <button on:click={increment}>
+    Clicks: {count}
+  </button>
+  <button { disabled } on:click={() => promise = search()}>fetch</button>
+  {#await promise}
+    <div>loading...</div>  
+  {:then value} 
+    <div>{@html value }</div>
+  {:catch err}
+    <div>{ err }</div>
+  {/await}
+</main>
