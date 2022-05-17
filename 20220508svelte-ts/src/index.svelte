@@ -1,44 +1,87 @@
 <script lang="ts">
-  import Clock from './lib/Clock.svelte';
-  import Counter from './lib/Counter.svelte';
-  import Test1 from './lib/test1.svelte';
-
-  const arr = [{
-    Tar:Clock,
-    props:{
-      size:'400px'
-    },
-    hash:'#clock'
-  }, {
-    Tar:Test1,
-    hash:'#test1'
-  }, {
-    Tar: Counter,
-    hash:'#counter'
-  }]
+  import { onMount, type SvelteComponent } from 'svelte';
+  import ReloadPrompt from './components/ReloadPrompt.svelte';
   
-  let hash = '';
-  $:{
-    location.hash = hash;
+  class Component {
+    Tar:typeof SvelteComponent;
+    path:string;
+    hash:string;
+    promise = new Promise(res => {});
+    on = false;
+    static hash = location.hash;
+    static arr:Component[] = [];
+    constructor(obj:{path:string, hash:string}){
+      this.path = obj.path;
+      this.hash = obj.hash;
+      Component.arr = [...Component.arr, this];
+    }
+    async getComponent() {
+      try{
+        this.on = true;
+        const data = await import(`./assets/${this.path}.svelte`);
+        this.Tar = data.default;
+      } catch(err){
+        this.on = false;
+        throw err;
+      }
+    }
   }
+
+  $:{
+    location.hash = Component.hash;
+    const comp = Component.arr.find(v => v.hash === Component.hash);
+    if(comp && !comp.on){
+      comp.promise = comp.getComponent();
+    }
+  }
+
+
+  new Component({
+    path:'Home',
+    hash:'#home'
+  });
+  new Component({
+    path:'Clock',
+    hash:'#clock',
+  });
+  new Component({
+    path:'Counter',
+    hash:'#test1',
+  });
+  new Component({
+    path:'test1',
+    hash:'#counter',
+  });
 
   const clickEvent = (e:MouseEvent) => {
     const tar = e.target;
     if(tar instanceof HTMLButtonElement){
-      hash = tar.dataset.hash;
+      Component.hash = tar.dataset.hash;
     }
   };
+
+  onMount(() => {
+    if(!Component.arr.find(v => v.hash === Component.hash)){
+      Component.hash = Component.arr[0].hash;
+    }
+  })
 </script>
 <header>
-  {#each arr as {hash:h}}
-    <button class="hash {h === hash ? 'active' : ''}" data-hash={h} on:click={clickEvent}>{h.slice(1)}</button>
+  {#each Component.arr as {hash:h}}
+    <button class="hash {h === Component.hash ? 'active' : ''}" data-hash={h} on:click={clickEvent}>{h.slice(1)}</button>
   {/each}
 </header>
-<a href="/lib">테스트</a>
+<ReloadPrompt />
 <main>
-  {#each arr as {Tar, props, hash:h}}
-    {#if h === hash}
-      <Tar {...props}/>
+  {#each Component.arr as comp}
+    {#if comp.hash === Component.hash}
+      {#await comp.promise}
+        <div>loading...</div>
+      {:then _} 
+        <svelte:component this={comp.Tar} />
+      {:catch err}
+        <div>{err}</div>
+      {/await}
     {/if}
   {/each}
 </main>

@@ -1,4 +1,7 @@
 <script lang="ts">
+import { onDestroy } from "svelte";
+
+
     let time = new Date();
     let hour:number, minu:number, seco:number, ms:number;
     // assignment 할당
@@ -22,11 +25,13 @@
     }
 
     const ani = () => {
+        console.log(30);
         time = new Date();
-        requestAnimationFrame(ani);
+        num = requestAnimationFrame(ani);
     }
 
-    ani();
+    let num = requestAnimationFrame(ani);
+    onDestroy(() => cancelAnimationFrame(num));
 </script>
 <main>
     <button on:click={() => view = !view}>토글</button>

@@ -1,12 +1,25 @@
 import { defineConfig, PluginOption } from 'vite'
 import { svelte } from '@sveltejs/vite-plugin-svelte'
 import sveltePreprocess from 'svelte-preprocess'
+import dynamicImportVarsDefault from '@rollup/plugin-dynamic-import-vars';
 import fs from 'fs/promises';
 import { fileURLToPath } from 'url';
 import path from 'path/posix';
+import { VitePWA } from 'vite-plugin-pwa'
 // https://vitejs.dev/config/
-const html = await fs.readFile('./template/index.html', {encoding:'utf-8'});
-const ChangeHtml:()=>PluginOption = function(){
+
+// @ts-ignore
+const dynamicImportVars = dynamicImportVarsDefault.default as typeof dynamicImportVarsDefault
+
+interface iChangeHTML{
+  template?:string;
+}
+
+const ChangeHtml:(config?:iChangeHTML)=>PluginOption = function(_config){
+  let config:iChangeHTML = {
+    template:'./template/index.html'
+  };
+  if(_config) config = _config;
   return {
     name:'ChangeHTML',
     async resolveId(source, importer){
@@ -18,20 +31,23 @@ const ChangeHtml:()=>PluginOption = function(){
       }
     },
     async load(id){
+      console.log(id);
       if(id.endsWith('.html')){
         let realId = id.replace(__dirname.replaceAll('\\', '/'), '.').replaceAll('\\', '/');
+        const html = await fs.readFile(config.template, {encoding:'utf-8'});
         return html.replace('{%script-template%}', `<script type="module" src="/src${realId.slice(1).replace('index.html', 'index.ts')}"></script>`);
       } else if(id.endsWith('.ts')){
         return `import App from './index.svelte';const app = new App({target: document.getElementById('app')});export default app`;
       }
     },
-    transformIndexHtml(html, ctx){
-      let root = ctx.filename.replace(__dirname.replaceAll('\\', '/'), '.').replaceAll('\\', '/');
-      let parCount = root.match(/\//g).length - 1;
-      return html.replace(/(src|href)=\"(.+?)\"/g, `$1="${'../'.repeat(parCount)}$2"`);
-    },
+    // transformIndexHtml(html, ctx){
+    //   let root = ctx.filename.replace(__dirname.replaceAll('\\', '/'), '.').replaceAll('\\', '/');
+    //   let parCount = root.match(/\//g).length - 1;
+    //   return html
+    // },
     configureServer(server){
-      server.middlewares.use(async (req, res, next) => {
+      console.log(server.config.root)
+      server.middlewares.use(server.config.base, async (req, res, next) => {
         if(req.url.match(/^\/@/) || req.url.match(/^\/node_modules/)){
           next();
         } else if(path.extname(req.url) === '' || path.extname(req.url) === '.html'){
@@ -41,9 +57,10 @@ const ChangeHtml:()=>PluginOption = function(){
           } else {
             arr.push('index.ts');
           }
+          const html = await fs.readFile(config.template, {encoding:'utf-8'});
           res.statusCode = 200;
           res.setHeader('Content-Type', 'text/html');
-          res.end(html.replace('{%script-template%}', `<script type="module" src="/src${decodeURIComponent(arr.join('/'))}"></script>`));
+          res.end(html.replace('{%script-template%}', `<script type="module" src="${server.config.base}src${decodeURIComponent(arr.join('/'))}"></script>`));
         } else if(path.extname(req.url) === '.ts'){
           try{
             await fs.access(`./src${decodeURIComponent(req.url)}`);
@@ -80,16 +97,27 @@ const findFiles = async (source:string, currentPath = ['.']) => {
 export default defineConfig(async () => {
   const input = await findFiles('./src');
   return {
-    plugins: [svelte({
+    plugins: [
+      VitePWA(),
+      ChangeHtml(),
+      svelte({
       configFile:false,
-      preprocess:sveltePreprocess()
-    }), ChangeHtml()],
+      preprocess:sveltePreprocess(),
+      include:["./src/**/*.svelte"],
+    })],
     build:{
       rollupOptions:{
-        input
+        plugins:[
+          dynamicImportVars()
+        ],
+        input,
+        output:{
+          assetFileNames:'assets/[name][extname]',
+          chunkFileNames:'lib/[name].js'
+        }
       }
     },
-    base:'',
+    base:'/svelte-sample',
     server:{
       host:'0.0.0.0'
     }

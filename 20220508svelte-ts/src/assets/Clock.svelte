@@ -1,24 +1,27 @@
 <script lang="ts">
+import { onDestroy } from "svelte";
+
+
     let time = new Date();
     let ms:number;
     let second:number;
     let minute:number;
     let hour:number;
-    export let size:string;
-    const arr = new Array(12).fill(0);
+    export let size = '400px';
     $:{
         ms = time.getMilliseconds();
         second = time.getSeconds();
         minute = time.getMinutes();
         hour = time.getHours();
     }
-
     const main = () => {
         time = new Date();
-        requestAnimationFrame(main);
+        num = requestAnimationFrame(main);
     }
 
-    main();
+    let num = requestAnimationFrame(main);
+
+    onDestroy(() => cancelAnimationFrame(num));
 </script>
 
 <main style="--size:{size}">
