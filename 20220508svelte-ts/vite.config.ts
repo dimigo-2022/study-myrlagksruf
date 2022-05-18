@@ -106,6 +106,7 @@ export default defineConfig(async () => {
       include:["./src/**/*.svelte"],
     })],
     build:{
+      outDir:"/Users/han/coding/myrlagksruf.github.io",
       rollupOptions:{
         plugins:[
           dynamicImportVars()
@@ -117,7 +118,7 @@ export default defineConfig(async () => {
         }
       }
     },
-    base:'/svelte-sample',
+    base:'/',
     server:{
       host:'0.0.0.0'
     }
