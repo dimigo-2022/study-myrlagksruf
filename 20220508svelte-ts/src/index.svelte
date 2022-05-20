@@ -46,11 +46,11 @@
   });
   new Component({
     path:'Counter',
-    hash:'#test1',
+    hash:'#counter',
   });
   new Component({
-    path:'test1',
-    hash:'#counter',
+    path:'Inputest',
+    hash:'#inputest',
   });
 
   const clickEvent = (e:MouseEvent) => {
@@ -60,13 +60,18 @@
     }
   };
 
+  const scrollEvent = (e:WheelEvent) => {
+    const tar = e.currentTarget as HTMLElement;
+    tar.scrollBy({ left:e.deltaY, behavior: 'smooth'});
+  }
+
   onMount(() => {
     if(!Component.arr.find(v => v.hash === Component.hash)){
       Component.hash = Component.arr[0].hash;
     }
-  })
+  });
 </script>
-<header>
+<header on:wheel|preventDefault={scrollEvent}>
   {#each Component.arr as {hash:h}}
     <button class="hash {h === Component.hash ? 'active' : ''}" data-hash={h} on:click={clickEvent}>{h.slice(1)}</button>
   {/each}
@@ -100,8 +105,18 @@
     background-color: ghostwhite;
     padding: 10px;
     border:3px solid black;
+    width: 100vw;
+    box-sizing: border-box;
+    overflow: auto;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
+  }
+  header::-webkit-scrollbar{
+    width: 0;
+    height: 5px;
+  }
+  header::-webkit-scrollbar-thumb{
+    background-color: black;
   }
 
   main {
@@ -144,18 +159,17 @@
 </style>
 
 <svelte:head>
-  <title>시발?</title>
+  <title>숙제 모음</title>
   <style>
     button {
       font-family: inherit;
       font-size: inherit;
-      padding: 1em 2em;
+      padding: 0.1em 2em;
       color: #ff3e00;
       background-color: rgba(255, 62, 0, 0.1);
       border-radius: 2em;
       border: 2px solid rgba(255, 62, 0, 0);
       outline: none;
-      width: 200px;
       font-variant-numeric: tabular-nums;
       cursor: pointer;
     }
