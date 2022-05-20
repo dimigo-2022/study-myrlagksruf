@@ -2,17 +2,23 @@
   import { onMount, type SvelteComponent } from 'svelte';
   import ReloadPrompt from './components/ReloadPrompt.svelte';
   
+  interface Props{
+    [key:string]:any
+  }
+
   class Component {
     Tar:typeof SvelteComponent;
     path:string;
     hash:string;
+    props:Props;
     promise = new Promise(res => {});
     on = false;
     static hash = location.hash;
     static arr:Component[] = [];
-    constructor(obj:{path:string, hash:string}){
+    constructor(obj:{path:string, hash:string, props?:Props}){
       this.path = obj.path;
       this.hash = obj.hash;
+      this.props = obj.props ?? {};
       Component.arr = [...Component.arr, this];
     }
     async getComponent() {
@@ -51,6 +57,9 @@
   new Component({
     path:'Inputest',
     hash:'#inputest',
+    props:{
+      num:5
+    }
   });
 
   const clickEvent = (e:MouseEvent) => {
@@ -83,7 +92,7 @@
       {#await comp.promise}
         <div>loading...</div>
       {:then _} 
-        <svelte:component this={comp.Tar} />
+        <svelte:component this={comp.Tar}  {...comp.props} />
       {:catch err}
         <div>{err}</div>
       {/await}
@@ -172,6 +181,7 @@
       outline: none;
       font-variant-numeric: tabular-nums;
       cursor: pointer;
+      transition: color 0.5s, background 0.5s;
     }
 
     button:hover{
