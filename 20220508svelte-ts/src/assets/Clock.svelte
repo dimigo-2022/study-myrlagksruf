@@ -1,7 +1,5 @@
 <script lang="ts">
-import { onDestroy } from "svelte";
-
-
+    import { onDestroy } from "svelte";
     let time = new Date();
     let ms:number;
     let second:number;
@@ -23,16 +21,15 @@ import { onDestroy } from "svelte";
 
     onDestroy(() => cancelAnimationFrame(num));
 </script>
-
 <main style="--size:{size}">
-    <div class="second" style={`transform:translateX(-50%) rotate(${(second * 6 + ms * 6 / 1000).toFixed(2)}deg)`}></div>
-    <div class="minute" style={`transform:translateX(-50%) rotate(${(minute * 6 + second / 10 + ms / 10000).toFixed(2)}deg)`}></div>
-    <div class="hour" style={`transform:translateX(-50%) rotate(${(hour * 30 + minute / 2 + second / 120 + ms / 120000).toFixed(2)}deg)`}></div>
+    <div class="second" style="transform:translateX(-50%) rotate({(second * 6 + ms * 6 / 1000).toFixed(2)}deg)"></div>
+    <div class="minute" style="transform:translateX(-50%) rotate({(minute * 6 + second / 10 + ms / 10000).toFixed(2)}deg)"></div>
+    <div class="hour" style="transform:translateX(-50%) rotate({(hour * 30 + minute / 2 + second / 120 + ms / 120000).toFixed(2)}deg)"></div>
     <div class="circle"></div>
-    {#each [1,2,3,4,5,6,7,8,9,10,11,12] as val, index}
-        <div class="ll ll-{val}" style={`transform: translateX(-50%) rotate(calc(${val} * 30deg))`}></div>
-        {#each [1,2,3,4] as val2}
-            <div class="lll lll-{val}-{val2}" style={`transform: translateX(-50%) rotate(calc(${val} * 30deg + ${val2} * 6deg))`}></div>            
+    {#each Array(12) as _,val}
+        <div class="ll ll-{val}" style="transform: translateX(-50%) rotate(calc({val} * 30deg))"></div>
+        {#each Array(4) as _,val2}
+            <div class="lll lll-{val}-{val2}" style="transform: translateX(-50%) rotate(calc({val} * 30deg + {val2 + 1} * 6deg))"></div>            
         {/each}
     {/each}
 </main>
