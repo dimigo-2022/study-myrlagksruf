@@ -51,8 +51,8 @@
     hash:'#clock',
   });
   new Component({
-    path:'Counter',
-    hash:'#counter',
+    path:'Turn',
+    hash:'#turn',
   });
   new Component({
     path:'Inputest',

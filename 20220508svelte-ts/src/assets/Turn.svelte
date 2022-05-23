@@ -1,7 +1,5 @@
 <script lang="ts">
-import { onDestroy } from "svelte";
-
-
+    import { onDestroy } from "svelte";
     let time = new Date();
     let hour:number, minu:number, seco:number, ms:number;
     // assignment 할당

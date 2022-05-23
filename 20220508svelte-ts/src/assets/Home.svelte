@@ -1,6 +1,7 @@
 <script lang="ts">
     import logo from './svelte.png'
-  </script>
+    import Counter from './Counter.svelte';
+</script>
   
   <main>
     <img src={logo} alt="Svelte Logo" />
@@ -15,6 +16,7 @@
       Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
       the officially supported framework, also powered by Vite!
     </p>
+    <Counter />
   </main>
   
   <style>
