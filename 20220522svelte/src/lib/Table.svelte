@@ -7,11 +7,17 @@
     ths = [...headers, ...new Array(Math.max(tds.length - headers.length, 0)).fill('')];
   }
 </script>
-<select>
-  <option value=""></option>
-</select>
 <table>
   <thead>
+    <tr>
+      <th colspan={ths.length}>
+        <select>
+          {#each tds as tr} 
+            <option value={tr[0]}>{tr[1]}</option>
+          {/each}
+        </select>
+      </th>
+    </tr>
     <tr>
       {#each ths as th}
         <th>{th}</th>
