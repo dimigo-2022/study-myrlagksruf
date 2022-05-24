@@ -1,24 +1,11 @@
 <script lang="ts">
     export let num = 10;
     let group:number[] = [];
-    let radioArr:HTMLInputElement[] = [];
     let arr:null[];
     let radio:number;
     $:{
         arr = new Array(num).fill(null);
         group = group.filter(v => v <= num - 1);
-    }
-
-    $:{
-        radioArr = radioArr.filter(v => {
-            if(!v) return false;
-            if(Number(v.value) === radio){
-                v.checked = true;
-            } else {
-                v.checked = false
-            }
-            return true;
-        });
     }
 </script>
 <main>
@@ -35,9 +22,9 @@
     </div>
     <div id="big-container">
         <div>
-            {#each group as val, index}
+            {#each group as val}
                 <div class="input-container">
-                    <input bind:this={radioArr[index]} id="rad-{val}" type="radio" bind:group={radio} value={val} />
+                    <input id="rad-{val}" type="radio" checked={radio === val ? true : false} bind:group={radio} value={val} />
                     <label for="rad-{val}">{val} 선택하기</label>
                 </div>
             {/each}
@@ -69,8 +56,9 @@
 
     #button-container{
         display: flex;
+        flex-basis: 100%;
         align-items: center;
-        width: max-content;
+        justify-content: space-between;
     }
 
     #big-container{
