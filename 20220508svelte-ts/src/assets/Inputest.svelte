@@ -1,10 +1,10 @@
 <script lang="ts">
     export let num = 10;
     let group:number[] = [];
-    let arr:null[];
+    let arr:undefined[];
     let radio:number;
     $:{
-        arr = new Array(num).fill(null);
+        arr = Array(num);
         group = group.filter(v => v <= num - 1);
     }
 </script>
@@ -24,7 +24,7 @@
         <div>
             {#each group as val}
                 <div class="input-container">
-                    <input id="rad-{val}" type="radio" checked={radio === val ? true : false} bind:group={radio} value={val} />
+                    <input on:input={() => setTimeout(() => console.log(radio))} id="rad-{val}" type="radio" checked={radio === val ? true : false} bind:group={radio} value={val} />
                     <label for="rad-{val}">{val} 선택하기</label>
                 </div>
             {/each}

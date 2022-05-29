@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount, type SvelteComponent } from 'svelte';
+  import Hana from './assets/Hana.svelte';
   import ReloadPrompt from './components/ReloadPrompt.svelte';
   
   interface Props{
@@ -58,7 +59,7 @@
     path:'Inputest',
     hash:'#inputest',
     props:{
-      num:5
+      num:15
     }
   });
 
@@ -79,6 +80,11 @@
       Component.hash = Component.arr[0].hash;
     }
   });
+
+  const HanaObj = {
+    inner:"얘들아 준원이 때려줘",
+    num:10,
+  }
 </script>
 <header on:wheel|preventDefault={scrollEvent}>
   {#each Component.arr as {hash:h}}
@@ -87,8 +93,9 @@
 </header>
 <ReloadPrompt />
 <main>
+  <Hana {...HanaObj} />
   {#each Component.arr as comp}
-    {#if comp.hash === Component.hash}
+  {#if comp.hash === Component.hash}
       {#await comp.promise}
         <div>loading...</div>
       {:then _} 
