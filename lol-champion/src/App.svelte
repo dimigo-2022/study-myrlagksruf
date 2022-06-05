@@ -29,6 +29,7 @@
   const main = async() => {
     const res = await fetch('/api/meta/champions?hl=ko_KR');
     const json = (await res.json()) as iData;
+    await new Promise(res => setTimeout(res, 3000));
     return json;
   }
   let promise = main();
