@@ -1,0 +1,18 @@
+[
+    {
+        "name":"변동윤",
+        "age":50,
+        "height":240,
+        "weight":10
+    },{
+        "name":"2준1",
+        "age":150,
+        "height":30,
+        "weight":500000000
+    },{
+        "name":"정민찬",
+        "age":-1,
+        "height":-1,
+        "weight":-1
+    }
+]

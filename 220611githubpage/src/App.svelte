@@ -10,14 +10,8 @@
   onMount(() => flag = true);
 </script>
 <header>
-  <div>hello</div>
-  <div>hello</div>
-  <div>hello</div>
-  <div>hello</div>
-  <div>hello</div>
-  <div>hello</div>
-  <div>hello</div>
-  <div>hello</div>
+  <button on:click={() => hash = '#counter'}>카운터</button>
+  <button on:click={() => hash = '#countless'}>카운트리스</button>
 </header>
 {#if hash === '#counter'}
   <main>
@@ -58,7 +52,6 @@
     position: sticky;
     display: flex;
     top:0;
-    height:30px;
     background-color: blue;
   }
   header > div{
@@ -101,5 +94,26 @@
     p {
       max-width: none;
     }
+  }
+  button {
+    font-family: inherit;
+    font-size: inherit;
+    padding: 1em 2em;
+    color: white;
+    background-color: rgba(255, 62, 0, 0.5);
+    border-radius: 2em;
+    border: 2px solid rgba(255, 62, 0, 0);
+    outline: none;
+    width: 200px;
+    font-variant-numeric: tabular-nums;
+    cursor: pointer;
+  }
+
+  button:focus {
+    border: 2px solid #ff3e00;
+  }
+
+  button:active {
+    background-color: rgba(255, 62, 0, 1);
   }
 </style>
