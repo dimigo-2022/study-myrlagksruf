@@ -1,21 +1,31 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
   import logo from './assets/svelte.png'
   import Counter from './lib/Counter.svelte'
   import Countless from './lib/Countless.svelte'
-  let flag = location.hash === '#counter' ? true : false;
-  let hash = '';
-  $:{
-    hash = flag ? '#counter' : '#countless';
-    location.hash = hash;
-  }
+  let flag = false;
+  let hash:string;
+  hash = location.hash;
+  $: if(flag) location.hash = hash;
+  onMount(() => flag = true);
 </script>
+<header>
+  <div>hello</div>
+  <div>hello</div>
+  <div>hello</div>
+  <div>hello</div>
+  <div>hello</div>
+  <div>hello</div>
+  <div>hello</div>
+  <div>hello</div>
+</header>
 {#if hash === '#counter'}
   <main>
     <img src={logo} alt="Svelte Logo" />
     <h1>Hello Typescript!</h1>
-    <Counter />
-    <button on:click={() => flag = !flag}>바꾸기</button>
-  
+    {#each Array(50) as _}
+      <Counter bind:hash={hash} />
+    {/each}
     <p>
       Visit <a href="https://svelte.dev">svelte.dev</a> to learn how to build Svelte
       apps.
@@ -28,23 +38,37 @@
   </main>
 {:else}
   <main>
-    <img src={logo} alt="Svelte Logo" /><br>
+    <img src={logo} alt="Svelte Logo" />
     <img src={logo} alt="Svelte Logo" />
     <h1>Hello Typescript!</h1>
-    <Countless />
-    <button on:click={() => flag = !flag}>바꾸기</button>
+    <Countless bind:hash={hash} />
   </main>
 {/if}
 
 <style>
+  :global(body){
+    margin: 0;
+  }
   :root {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
       Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   }
 
+  header{
+    position: sticky;
+    display: flex;
+    top:0;
+    height:30px;
+    background-color: blue;
+  }
+  header > div{
+    color:white;
+  }
+
   main {
     text-align: center;
     padding: 1em;
+    overflow: auto;
     margin: 0 auto;
   }
 

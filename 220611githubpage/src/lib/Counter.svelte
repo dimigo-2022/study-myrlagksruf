@@ -1,5 +1,6 @@
 <script lang="ts">
   let count: number = 0;
+  export let hash:string;
   const increment = () => {
     count += 1
   };
@@ -8,6 +9,7 @@
 <button on:click={increment}>
   Clicks: {count}
 </button>
+<button on:click={() => hash = '#countless'}>카운트리스로</button>
 
 <style>
   button {

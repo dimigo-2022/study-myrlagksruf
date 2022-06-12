@@ -1,5 +1,6 @@
 <script lang="ts">
-  let count: number = 0
+  let count: number = 0;
+  export let hash:string;
   const decrement = () => {
     count -= 1
   }
@@ -8,6 +9,7 @@
 <button on:click={decrement}>
   Click - {count}
 </button>
+<button on:click={() => hash = '#counter'}>카운터로</button>
 
 <style>
   :root{
