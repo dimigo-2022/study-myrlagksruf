@@ -23,10 +23,7 @@
     if(!obj.length || e.code !== 'Enter') return;
     hash = `#countless?name=${value ?? ''}`;
   };
-  $:{
-    query = new URLSearchParams(decodeURIComponent(hash.split('?')[1]));
-    // value = query.get('name');
-  }
+  $:query = new URLSearchParams(decodeURIComponent(hash.split('?')[1]));
   let promise = main();
 </script>
 <input type="text" on:keydown={enter} bind:value={value}>
