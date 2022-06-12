@@ -16,10 +16,7 @@
   const main = async () => {
     const res = await fetch('/student.json');
     const json = (await res.json()) as Student[];
-    await new Promise(res => setTimeout(res, 1000));
-    for(let i of json){
-      obj.push(i);
-    }
+    obj = json;
   };
 
   const enter = (e:KeyboardEvent) => {
