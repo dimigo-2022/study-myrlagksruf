@@ -9,27 +9,32 @@
     location.hash = hash;
   }
 </script>
-상
-<main>
-  <img src={logo} alt="Svelte Logo" />
-  <h1>Hello Typescript!</h1>
-  {#if hash === '#counter'}
+{#if hash === '#counter'}
+  <main>
+    <img src={logo} alt="Svelte Logo" />
+    <h1>Hello Typescript!</h1>
     <Counter />
-  {:else}
+    <button on:click={() => flag = !flag}>바꾸기</button>
+  
+    <p>
+      Visit <a href="https://svelte.dev">svelte.dev</a> to learn how to build Svelte
+      apps.
+    </p>
+  
+    <p>
+      Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
+      the officially supported framework, also powered by Vite!
+    </p>
+  </main>
+{:else}
+  <main>
+    <img src={logo} alt="Svelte Logo" /><br>
+    <img src={logo} alt="Svelte Logo" />
+    <h1>Hello Typescript!</h1>
     <Countless />
-  {/if}
-  <button on:click={() => flag = !flag}>바꾸기</button>
-
-  <p>
-    Visit <a href="https://svelte.dev">svelte.dev</a> to learn how to build Svelte
-    apps.
-  </p>
-
-  <p>
-    Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
-    the officially supported framework, also powered by Vite!
-  </p>
-</main>
+    <button on:click={() => flag = !flag}>바꾸기</button>
+  </main>
+{/if}
 
 <style>
   :root {
