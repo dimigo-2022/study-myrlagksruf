@@ -14,12 +14,22 @@
     count -= 1
   };
   const main = async () => {
-    // 코드 입력
+    const res = await fetch('/student.json');
+    const json = (await res.json()) as Student[];
+    await new Promise(res => setTimeout(res, 1000));
+    for(let i of json){
+      obj.push(i);
+    }
   };
 
   const enter = (e:KeyboardEvent) => {
-    //코드 입력
+    if(!obj.length || e.code !== 'Enter') return;
+    hash = `#countless?name=${value ?? ''}`;
   };
+  $:{
+    query = new URLSearchParams(decodeURIComponent(hash.split('?')[1]));
+    // value = query.get('name');
+  }
   let promise = main();
 </script>
 <input type="text" on:keydown={enter} bind:value={value}>
