@@ -8,28 +8,18 @@
     weight:number;
   }
   let obj:Student[] = [];
-  let query = new URLSearchParams('');
+  let query:URLSearchParams;
   export let hash:string;
   const decrement = () => {
     count -= 1
   };
   const main = async () => {
-    const res = await fetch('/student.json');
-    const json = (await res.json()) as Student[];
-    await new Promise(res => setTimeout(res, 1000));
-    for(let i of json){
-      obj.push(i);
-    }
+    // 코드 입력
   };
 
   const enter = (e:KeyboardEvent) => {
-    if(!obj.length || e.code !== 'Enter') return;
-    hash = `#countless?name=${value ?? ''}`;
+    //코드 입력
   };
-  $:{
-    query = new URLSearchParams(decodeURIComponent(hash.split('?')[1]));
-    // value = query.get('name');
-  }
   let promise = main();
 </script>
 <input type="text" on:keydown={enter} bind:value={value}>

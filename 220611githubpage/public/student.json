@@ -14,5 +14,10 @@
         "age":-1,
         "height":-1,
         "weight":-1
+    },{
+        "name":"2주in",
+        "age":999,
+        "height":999,
+        "weight":65535
     }
 ]
