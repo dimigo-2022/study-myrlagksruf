@@ -8,10 +8,12 @@
   hash = location.hash;
   $: if(flag) location.hash = hash;
   onMount(() => flag = true);
+  const back = `--logo:url(${logo})`;
 </script>
-<header>
+<header style={back}>
   <button on:click={() => hash = '#counter'}>카운터</button>
   <button on:click={() => hash = '#countless'}>카운트리스</button>
+  <div></div>
 </header>
 {#if hash === '#counter'}
   <main>
@@ -56,6 +58,11 @@
   }
   header > div{
     color:white;
+    background-image: var(--logo);
+    background-size: auto 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    width:100px;
   }
 
   main {
