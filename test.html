@@ -7,6 +7,27 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <script>
+        let max = 0;
+        const main = (str = '', last = '') => {
+            if(str.length === 6){
+                const ind4 = str.indexOf('4');
+                const ind5 = str.indexOf('5');
+                if(str[ind4 + 1] && str[ind4 + 1] < 4 || str[ind4 - 1] && str[ind4 - 1] < 4){
+                    return
+                }
+                if(str[ind5 + 1] && str[ind5 + 1] > 5 || str[ind5 - 1] && str[ind5 - 1] > 5){
+                    return
+                }
+                max ++;
+                return;
+            }
+            for(let i = 0; i < last.length; i++){
+                main(`${str}${last[i]}`, `${last.slice(0, i)}${last.slice(i + 1)}`);
+            }
+        };
+
+        main('', '123456');
+    </script>
 </body>
 </html>
