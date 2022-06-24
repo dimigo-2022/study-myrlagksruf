@@ -116,7 +116,7 @@ export class IndexedTree{
                 this.find(i.y1, i.y2, i.type);
             }
         }
-        console.log(total);
+        return total;
     }
 
     find(y1:number, y2:number, type:'L'|'R'){
@@ -152,8 +152,6 @@ export class IndexedTree{
         }
 
         arr.sort((a, b) => a.E - a.S - b.E + b.S);
-
-        console.log(arr);
 
         for(let i of arr){
             i.data.cnt += typeSum[type];

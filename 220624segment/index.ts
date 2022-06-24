@@ -2,6 +2,7 @@ import { IndexedTree, DrawInfo } from './indexedtree.js';
 
 const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d');
+const res = document.querySelector<HTMLDivElement>('#res');
 
 const rects:DrawInfo[] = [];
 const infoRects:DrawInfo[] = [];
@@ -47,7 +48,7 @@ canvas.addEventListener('mousemove', e => {
     } else {
         if(isDrawStart()) return;
         const rect = changePos(draw);
-        console.log(`너비 : ${(rect.pos[2] - rect.pos[0]) * (rect.pos[3] - rect.pos[1])}, x1 : ${rect.pos[0]}, x2 : ${rect.pos[2]}, y1 : ${rect.pos[1]}, y2 : ${rect.pos[3]}`);
+        // console.log(`너비 : ${(rect.pos[2] - rect.pos[0]) * (rect.pos[3] - rect.pos[1])}, x1 : ${rect.pos[0]}, x2 : ${rect.pos[2]}, y1 : ${rect.pos[1]}, y2 : ${rect.pos[3]}`);
         rects.push(rect);
         infoRects.push(rect);
         infoRects.sort((a, b) => a.pos[0] - b.pos[0]);
@@ -56,7 +57,7 @@ canvas.addEventListener('mousemove', e => {
             color : '#000000'
         };
 
-        tree.update();
+        res.innerHTML = `총 너비 : ${tree.update()}`;
     }
 });
 
