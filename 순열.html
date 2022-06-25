@@ -42,43 +42,28 @@
     </style>
 </head>
 <body>
-    <main>
-        <div id="menu">
-            <button>메뉴</button>
-        </div>
-        <div id="side"></div>
-        <div id="main"></div>
-        <div id="footer"></div>
-    </main>
-    <script type="module">
-        const main = document.querySelector('main');
-        const button = document.querySelector('button');
-
-        button.addEventListener('click', e => {
-            main.classList.toggle('on');
-        })
-    </script>
+    <input type="text">
+    <div></div>
     <script type="module">
         let max = 0;
-        const main2 = (str = '', last = '') => {
-            if(str.length === 6){
-                const ind4 = str.indexOf('4');
-                const ind5 = str.indexOf('5');
-                if(str[ind4 + 1] && str[ind4 + 1] < 4 || str[ind4 - 1] && str[ind4 - 1] < 4){
-                    return
-                }
-                if(str[ind5 + 1] && str[ind5 + 1] > 5 || str[ind5 - 1] && str[ind5 - 1] > 5){
-                    return
-                }
-                max ++;
-                return;
+        const div = document.querySelector('div');
+        const input = document.querySelector('input');
+        const main2 = (str = '', last = '', arr = []) => {
+            if(last.length === 0){
+                arr.push(str);
+                return arr;
             }
             for(let i = 0; i < last.length; i++){
-                main(`${str}${last[i]}`, `${last.slice(0, i)}${last.slice(i + 1)}`);
+                main2(`${str}${last[i]}`, `${last.slice(0, i)}${last.slice(i + 1)}`, arr);
             }
+            return arr;
         };
 
-        main2('', '123456');
+        input.addEventListener('keydown', e => {
+            if(e.code === 'Enter'){
+                div.innerHTML = main2('', input.value).join('<br>');
+            }
+        });
     </script>
 </body>
 </html>
