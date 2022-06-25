@@ -5,8 +5,58 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        body{
+            margin:0;
+        }
+        main{
+            height: 100vh;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 0px repeat(2, 1fr);
+            grid-template-rows: 60px 1fr 30px;
+            transition: all 0.3s;
+        }
+        main.on{
+            grid-template-columns: 300px repeat(2, 1fr);
+        }
+        #menu{
+            grid-column: 1 / 4;
+            grid-row: 1;
+            background-color: red;
+        }
+        #side{
+            grid-column: 1;
+            grid-row: 2;
+            background-color: blue;
+        }
+        #main{
+            grid-column: 2 / 4;
+            grid-row: 2;
+            background-color: green;
+        }
+        #footer{
+            grid-column: 1 / 4;
+            grid-row: 3;
+        }
+    </style>
 </head>
 <body>
-    
+    <main>
+        <div id="menu">
+            <button>메뉴</button>
+        </div>
+        <div id="side"></div>
+        <div id="main"></div>
+        <div id="footer"></div>
+    </main>
+    <script>
+        const main = document.querySelector('main');
+        const button = document.querySelector('button');
+
+        button.addEventListener('click', e => {
+            main.classList.toggle('on');
+        })
+    </script>
 </body>
 </html>
