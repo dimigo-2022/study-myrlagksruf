@@ -119,7 +119,7 @@ export class IndexedTree {
             left = left.par;
             right = right.par;
         }
-        arr.sort((a, b) => a.E - a.S - b.E + b.S);
+        // arr.sort((a, b) => a.E - a.S - b.E + b.S);
         for (let i of arr) {
             i.data.cnt += typeSum[type];
             if (i.data.cnt === 0) {
