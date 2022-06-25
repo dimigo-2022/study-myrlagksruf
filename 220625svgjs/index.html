@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        circle{
+            transition: all 30s;
+        }
+
+        #b{
+            fill:black;
+        }
+
+        #r{
+            fill:red;
+        }
+
+        #b.fill, #r.fill{
+            fill: blue;
+        }
+
+        span{
+            display: inline-block;
+            width: 40%;
+            border:1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <svg viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
+        <circle id="b" cx="50" cy="50" r="50"/>
+        <circle id="r" cx="150" cy="50" r="50"/>
+    </svg>
+    <script>
+        const circle = document.querySelectorAll('circle');
+
+        circle[0].onclick = e => e.target.classList.toggle('fill');
+        circle[1].onclick = e => e.target.classList.toggle('fill');
+    </script>
+</body>
+</html>
