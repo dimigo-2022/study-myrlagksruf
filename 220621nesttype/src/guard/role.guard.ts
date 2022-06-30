@@ -7,6 +7,6 @@ export class RolesGuard implements CanActivate {
     context: ExecutionContext,
   ): boolean | Promise<boolean> {
     // console.log(context.switchToHttp().getRequest<FastifyRequest>());
-    return false;
+    return true;
   }
 }
