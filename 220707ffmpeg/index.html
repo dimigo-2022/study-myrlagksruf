@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <head>
 <meta charset="UTF-8">
-<script src="https://cdn.dashjs.org/latest/dash.all.min.js"></script>
 <style>
     video {
         width: 640px;
@@ -10,7 +9,35 @@
 </style>
 <body>
     <div>
-        <video data-dashjs-player autoplay controls src="manifest.mpd" type="application/dash+xml"></video>
+        <video controls data-src="manifest.mpd" type="application/dash+xml"></video>
     </div>
+    <script>
+        const video = document.querySelector('video');
+        const mediaSource = new MediaSource();
+        video.src = URL.createObjectURL(mediaSource);
+        const parser = new DOMParser();
+        const fetchBuffer = async (url) => {
+            const res = await fetch(url);
+            return res.arrayBuffer();
+        }
+        mediaSource.addEventListener('sourceopen', async e => {
+            const res = await fetch(video.dataset.src);
+            const txt = await res.text();
+            const xml = parser.parseFromString(txt, 'application/xml');
+            const rep = xml.querySelector('Representation');
+            const mimeType = `${rep.getAttribute('mimeType')}; codecs="${rep.getAttribute('codecs')}"`;
+            if(!MediaSource.isTypeSupported(mimeType)) return false;
+            
+            const sourceBuffer = mediaSource.addSourceBuffer(mimeType);
+            const datas = await Promise.all(['init-stream0.m4s', 'chunk-stream0-00022.m4s', 'chunk-stream0-00023.m4s', 'chunk-stream0-00024.m4s', 'chunk-stream0-00025.m4s'].map(fetchBuffer));
+            sourceBuffer.mode = 'sequence'
+            datas.forEach(v => sourceBuffer.appendBuffer(new Uint8Array(v)));
+            // sourceBuffer.addEventListener('updateend', function() {
+            //     if (!sourceBuffer.updating && mediaSource.readyState === 'open') {
+            //         mediaSource.endOfStream();
+            //     }
+            // });
+        });
+    </script>
 </body>
 </html>
