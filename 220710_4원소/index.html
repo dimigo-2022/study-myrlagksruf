@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            width:400px;
+            height:300px;
+            background-image: url('img/elements.jpg');
+            background-size: 200% 200%;
+            transition: all 0.3s;
+        }
+    </style>
+</head>
+
+<body>
+<h1>그림을 클릭해보세요.</h1>
+<div></div>
+<script>
+    const div = document.querySelector('div');
+    let numX = 1;
+    let numY = 0;
+    // 왼쪽 위
+    // 오른쪽 위
+    // 오른쪽 아래
+    // 왼쪽 아래
+    
+    // numX
+    // 0 : 왼쪽
+    // 1 : 왼쪽
+    // 2 : 오른쪽
+    // 3 : 오른쪽
+
+    // numY
+    // 0 : 위쪽
+    // 1 : 위쪽
+    // 2 : 아래쪽
+    // 3 : 아래쪽
+
+    div.onclick = e => {
+        numX = (numX + 1) % 4
+        numY = (numY + 1) % 4
+        div.style.backgroundPositionX = `${Math.floor(numX / 2) * 100}%`
+        div.style.backgroundPositionY = `${Math.floor(numY / 2) * 100}%`
+    }
+</script>
+</body>
+
+</html>

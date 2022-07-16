@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello World!!!</title>
+    <style>
+        p{
+           color: olive;
+           background-color: lightcoral;
+        }
+
+        div > div{
+            color: white;
+            background-color: blue;
+            user-select: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <div>태그1</div>
+        <div>태그2</div>
+        <div>태그3</div>
+        <div>태그4</div>
+        <div>태그5</div>
+        <div>태그6</div>
+        <div>태그7</div>
+        <div>태그8</div>
+        <div>태그9</div>
+        <div>태그10</div>
+    </div>
+    <script>
+        let num = 0;
+        window.onclick = e => {
+            num = num + 1;
+            let div = document.querySelector(`div > div:nth-child(${num})`);
+            div.style.backgroundColor = 'red';
+        }
+    </script>
+</body>
+
+</html>
