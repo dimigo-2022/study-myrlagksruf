@@ -1,0 +1,38 @@
+$color:#f8e287;
+$size:30px;
+.bird {
+    box-sizing: border-box;
+    position: absolute;
+    left:0;
+    top:0;
+    width: $size;
+    height: $size;
+    border-radius: 50%;
+    background-color: transparent;
+    border: 2px solid black;
+}
+
+.bird.on{
+    background-color: $color;
+    box-shadow: 0 0 calc($size / 3) $color;
+    animation: on 0.5s;
+}
+
+@keyframes on {
+    0%{
+        background-color: transparent;
+        box-shadow: 0 0 0 transparent;
+    }
+    10% {
+        background-color: $color;
+        box-shadow: 0 0 calc($size / 3) $color;
+    }
+    40%{
+        background-color: $color;
+        box-shadow: 0 0 calc($size / 3) $color;
+    }
+    100%{
+        background-color: transparent;
+        box-shadow: 0 0 0 transparent;
+    }
+}
