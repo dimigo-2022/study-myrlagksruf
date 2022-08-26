@@ -1,0 +1,100 @@
+*{
+    box-sizing: border-box;
+}
+body{
+    margin:0;
+    overflow-y: hidden;
+    background-color: #007f00;
+}
+#container{
+    display: flex;
+    width: 100%;
+    max-width: 900px;
+    height: 100vh;
+    flex-direction: column;
+    margin:auto;
+    header{
+        display: flex;
+        height: min(150px, calc(100vw / 6));
+        margin-bottom: min(20px, calc(100vw / (900 / 20)));
+        div:not(.middle, .trump[data-num]){
+            border:2px solid;
+            border-color:black #00f500 #00f500 black;
+            /* border-radius: 10px; */
+            flex-basis: calc(100% / 9);
+        }
+        .middle{
+            position: relative;
+            flex-basis: calc(100% / 9);
+        }
+        .middle::after{
+            content: "";
+            position: absolute;
+            left:50%;
+            top:min(25px, calc(100vw / (900 / 25)));
+            transform: translateX(-50%);
+            width:min(55px, calc(100vw / (900 / 55)));
+            height: min(55px, calc(100vw / (900 / 55)));
+            border:2px solid;
+            border-color:#00f500 black black #00f500;
+            background-image: url("./king.png");
+            background-repeat: no-repeat;
+            background-size: 90% 90%;
+            background-position: center;
+        }
+        .middle.inverse::after{
+            transform: translateX(-50%) scaleX(-1);
+            border-color:#00f500 #00f500 black black;
+        }
+
+        .trump[data-c][data-p][data-num]{
+            height: min(150px, calc(100vw / (900/ 150)));
+        }
+    }
+    main{
+        display: flex;
+        flex-grow: 1;
+        justify-content: space-around;
+        align-items: stretch;
+        & > div{
+            display: flex;
+            flex-direction: column;
+            flex-basis: min(100px, calc(100vw / (900 / 100)));
+        }
+    }
+    .trump{
+        transition: filter 0.3s;
+        &[data-c][data-p]:nth-child(n){
+            position: relative;
+            width:min(100px, calc(100vw / (900 / 100)));
+            height: min(30px, calc(100vw / (900/ 30)));
+            overflow: hidden;
+        }
+        &[data-c][data-p]::before{
+            content: "";
+            position: absolute;
+            left:0;
+            top:0;
+            background-image: url("./com.png");
+            background-size: 1300% 400%;
+            width:min(100px, calc(100vw / (900 / 100)));
+            height: min(150px, calc(100vw / (900/ 150)));
+        }
+        &[data-c][data-p]:last-child{
+            height: min(150px, calc(100vw / (900/ 150)));
+        }
+        @for $var from 1 through 13 {
+            &[data-c="#{$var}"]::before{
+                background-position-x: calc(100% / 12 * ($var - 1));
+            }
+        }
+        @for $var from 1 through 4 {
+            &[data-p="#{$var}"]::before{
+                background-position-y:calc(100% / 3 * ($var - 1));
+            }
+        }
+    }
+}
+#pick{
+    filter: invert(1);
+}
