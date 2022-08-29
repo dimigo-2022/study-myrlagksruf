@@ -19,6 +19,7 @@ function init(){
     }
 
     const clickFun = (e:MouseEvent|TouchEvent) => {
+        e.preventDefault();
         if(!state.can) return;
         let pickTemp = document.querySelector<HTMLDivElement>('#pick');
         if(!(e.target instanceof HTMLDivElement &&
