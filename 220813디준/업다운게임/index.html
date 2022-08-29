@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        input{
+            outline: none;
+        }
+        input:invalid ~ #result::after{
+            content: "1 ~ 100 사이의 정수를 입력해주세요.";
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <!-- 업다운 게임을 만든다.
+    life는 7로 설정하고, 한 번의 시도마다 하나씩 줄어든다.
+    만약 life가 0이 되면 게임이 종료된다.
+    숫자의 범위는 1 ~ 100의 정수이며, input태그에서도 validity를 검사해준다.
+    정답이 입력값보다 작을 경우 `정답은 ${num}보다 더 작습니다.` 라는 글자가 나온다.
+    정답이 입력값보다 클 경우 `정답은 ${num}보다 더 큽니다.` 라는 글자가 나온다.
+    정답을 끝까지 맞추지 못할 경우 `정답을 맞추지 못했습니다. 정답은 ${answer}입니다.` 라는 글자가 나온다.
+    만일 정답을 맞추면 `정답입니다.` 라는 글자가 나온다.
+    기록은 누적된다. -->
+
+    <h2>업다운 게임</h2>
+    <h4><span>life : </span><span>7</span></h4>
+    <input type="number" min="1" max="100" step="1" placeholder="1 ~ 100" id="inp" required>
+    <button>체크</button>
+    <div id="result"></div>
+    
+    <script>
+        const inp = document.querySelector('input');
+        const result = document.querySelector('#result');
+        const answer = Math.floor(Math.random() * 100) + 1;
+        const lifeSpan = document.querySelector('h4 > span:nth-child(2)');
+        const button = document.querySelector('button');
+        let life = Number(lifeSpan.innerHTML);
+
+        button.addEventListener('click', e => {
+            if(inp.validity.valid === false) return;
+            let val = inp.valueAsNumber;
+            if(life === -1){
+                location.reload();
+            } else if(val > answer){
+                result.innerHTML += `<div>${val} &gt; answer</div>`;
+            } else if(val < answer){
+                result.innerHTML += `<div>${val} &lt; answer</div>`;
+            } else {
+                result.innerHTML += '<div>정답입니다.</div>';
+                lifeSpan.style.display = 'none';
+                life = 0;
+                inp.disabled = true;
+            }
+            
+            life --;
+            if(life === 0){
+                result.innerHTML += '<div><em style="color:white;background-color:red">당신은 <span style="border-bottom:3px dashed black">패배자</span>입니다.</em></div>';
+                life = -1;
+                inp.disabled = true;
+                lifeSpan.style.display = 'none';
+            }
+            inp.value = '';
+            inp.focus();
+            lifeSpan.innerHTML = life;
+        });
+    </script>
+</body>
+
+</html>

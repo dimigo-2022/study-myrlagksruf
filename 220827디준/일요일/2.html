@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        [data-x="0"]::after{
+            content: "X";
+        }
+        [data-x="1"]::after{
+            content: "O";
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div>마우스 왼쪽 클릭 : </div>
+        <div>마우스 오른쪽 클릭 : </div>
+        <div>마우스 가운데 클릭 : </div>
+        <div>마우스 뒤로 클릭 : </div>
+        <div>마우스 앞으로 클릭 : </div>
+    </div>
+    <script>
+        /* e.button
+            0 : 왼쪽
+            1 : 가운데
+            2 : 오른쪽
+            3 : 인터넷 뒤로가기
+            4 : 인터넷 앞으로가기
+        */
+
+        const div = document.querySelector('div');
+        addEventListener('click', e => {
+            e.preventDefault();
+        });
+
+        addEventListener('contextmenu', e => {
+            e.preventDefault();
+        });
+
+        addEventListener('mousedown', e => {
+            const info = e.buttons.toString(2).padStart(5, '0');
+            // 01101
+            div.innerHTML = `<div data-x="${info[4]}">마우스 왼쪽 클릭 : </div>
+        <div data-x="${info[3]}">마우스 오른쪽 클릭 : </div>
+        <div data-x="${info[2]}">마우스 가운데 클릭 : </div>
+        <div data-x="${info[1]}">마우스 뒤로 클릭 : </div>
+        <div data-x="${info[0]}">마우스 앞으로 클릭 : </div>`;
+        })
+
+        addEventListener('mouseup', e => {
+            const info = e.buttons.toString(2).padStart(5, '0');
+            // 01101
+            div.innerHTML = `<div data-x="${info[4]}">마우스 왼쪽 클릭 : </div>
+        <div data-x="${info[3]}">마우스 오른쪽 클릭 : </div>
+        <div data-x="${info[2]}">마우스 가운데 클릭 : </div>
+        <div data-x="${info[1]}">마우스 뒤로 클릭 : </div>
+        <div data-x="${info[0]}">마우스 앞으로 클릭 : </div>`;
+        })
+    </script>
+</body>
+</html>

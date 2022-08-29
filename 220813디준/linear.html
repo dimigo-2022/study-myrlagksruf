@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            --c:270deg;
+            background-image: linear-gradient(
+                var(--c), 
+                red calc(100% / 3),
+                blue calc(100% / 3) calc(100% / 3 * 2),
+                green calc(100% / 3 * 2)
+            );
+            margin: 0;
+            height: 100vh;
+            transition: 0.5s;
+        }
+        div{
+            display: inline-block;
+            padding: 50px;
+            background-color: rgba(0, 0, 0, 0.4);
+            transform: rotate(var(--c));
+        }
+
+        #x{
+            width: 30px;
+            height: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div>
+            <div id="x"></div>
+        </div>
+    </div>
+    <script>
+        let count = 0;
+        const loop = () => {
+            count = (count + 1) % 360;
+            document.body.style.setProperty('--c', `${count + 270}deg`);
+            requestAnimationFrame(loop);
+        }
+        
+        requestAnimationFrame(loop);
+    </script>
+</body>
+</html>

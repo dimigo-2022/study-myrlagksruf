@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            padding:40px;
+            background-color: rgba(255, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div id="x1">
+        <div id="x2">
+            <div id="x3">
+                <div id="x4">
+                    <div id="x5"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // 위에서 아래로 코드를 읽을 때 맨 처음 만나는 태그
+        const div = document.querySelector('div');
+        // 함수 : 행동
+        div.addEventListener('click', (e) => {
+            // target : 이벤트 발생
+            // currentTarget : 이벤트 등록
+            console.log(e.target.id, e.currentTarget.id);
+        });
+        
+
+        let calc = (a, b, callback) => {
+            console.log(`시작 <${callback(a, b)}> 끝`);
+        };
+        // 함수정의 : 실행 안됨
+        // 소괄호 : 매개변수
+        let add = (c, d) => {
+            return c + d;
+        };
+
+        calc(10, 20, add);
+        
+        // 1. 함수 : 행동
+        // 2. 함수에 어떤 코드를 써서 그 코드를 실행시킬 수 있음
+        // 3. '함수를 호출한다'라고 함
+        // add(10, 20) -> 안에있는 코드가 실행된다
+        // 4. add(10, 20) 항상 결과값이 있음 return
+        // let a = add(10, 20);
+    </script>
+</body>
+</html>

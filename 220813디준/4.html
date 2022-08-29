@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button>버튼</button>
+    <a href="https://www.naver.com">네이버로?</a>
+    <script>
+        const but = document.querySelector('button');
+        const aTag = document.querySelector('a');
+        // MouseEvent       마우스 이벤트   click, contextmenu, mousemove, mousedown, mouseup, dbclick
+        // mouseover, mouseout, mouseenter, mouseleave
+        // 속성             button
+
+        // KeyboardEvent    키보드 이벤트   keydown, keyup
+
+        const objKey = {
+            ArrowLeft: false,
+            ArrowRight: false,
+            ArrowUp: false,
+            ArrowDown: false,
+        }
+
+        but.addEventListener('mouseup', e => {
+            console.log(e.button);
+        });
+
+        aTag.addEventListener('click', evt => {
+            evt.preventDefault();
+        });
+
+        aTag.addEventListener('contextmenu', e => {
+            e.preventDefault();
+        });
+
+        window.addEventListener('keydown', e => {
+            if(!(e.code in objKey) || e.repeat) return;
+
+            objKey[e.code] = true;
+            console.log(objKey);
+        });
+
+        window.addEventListener('keyup', e => {
+            if(!(e.code in objKey)) return;
+
+            objKey[e.code] = false;
+            console.log(objKey);
+        });
+
+        aTag.addEventListener('mousedown', e => {
+            if(e.button === 0){
+                alert('왼쪽 클릭하셨습니다.');
+            } else if(e.button === 1){
+                alert('휠 클릭하셨습니다.');
+            } else if(e.button === 2){
+                alert('오른쪽 클릭하셨습니다.')
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            margin:0;
+            overflow: hidden;
+            height: 100vh;
+        }
+        #con{
+            --c:0px;
+            /* --v 잘 써서 풀어보기 */
+            --v:40px;
+            height: 100%;
+            background-image: repeating-linear-gradient(-45deg,
+                red calc(var(--v) + var(--c)),
+                orange calc(var(--v) * 2 + var(--c)),
+                yellow calc(var(--v) * 3 + var(--c)),
+                green calc(var(--v) * 4 + var(--c)),
+                blue calc(var(--v) * 5 + var(--c)),
+                indigo calc(var(--v) * 6 + var(--c)),
+                violet calc(var(--v) * 7 + var(--c)),
+                red calc(var(--v) * 8 + var(--c)));
+        }
+    </style>
+</head>
+<body>
+    <div id="con"></div>
+    <script>
+        // 클릭하면 멈췄다가, 클릭하면 다시 움직이기
+        // 키보드 위키 누르면 범위가 커졌다가 키보드 아래키 누르면 범위 작아지기
+        const objKey = {
+            ArrowUp: false,
+            ArrowDown: false,
+        }
+        const con = document.querySelector('div');
+        let stream = 0;
+        con.addEventListener('click', e => {
+            stream += 10;
+            con.style.setProperty('--c', `${stream}px`);
+        });
+        const main = () => {
+            requestAnimationFrame(main);
+        };
+
+        requestAnimationFrame(main);
+        window.addEventListener('keydown', e => {
+            if(!(e.code in objKey)) return;
+            objKey[e.code] = true; 
+        });
+
+        window.addEventListener('keyup', e => {
+            if(!(e.code in objKey)) return;
+            objKey[e.code] = true; 
+        })
+    </script>
+</body>
+</html>

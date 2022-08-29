@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+        h1{
+            position: absolute;
+            user-select: none;
+        }
+        div{
+            --v:128;
+            border-radius: 50%;
+            width: 10px;
+            height: 10px;
+            background-color: rgb(128, 128, 128);
+            transform: scale(calc(1 + (var(--v) - 128) / 2));
+            background-color: rgb(var(--v), calc(256 - var(--v)), calc(256 - var(--v)));
+        }
+    </style>
+</head>
+<body>
+    <h1>눌러보세요</h1>
+    <div></div>
+    <script>
+        // 창을 클릭하고 있을 때는 num이 1씩 커져서 256까지 커지도록한다.
+        // 클릭하고 있지 않을 때는 num이 1씩 작아져서 128까지 작아지도록 한다.
+        // num은 128 ~ 256 사이에서 변화하는 숫자이다.
+        // num에 따라서 div의 scale 값을 조절해준다.
+        // 만약 num이 128이면 scale은 1이다.
+        // 만약 num이 256이면 scale은 65이다.
+        // 위의 계산값은 1 + (num - 128) / 2 를 계산한 값이다.
+        // 이때 색 또한 바뀌는데
+        // num이 128이면 rgb(128, 128, 128) 이고
+        // num이 256이면 rgb(256, 0, 0) 이다.
+        const div = document.querySelector('div');
+        let num = 128;
+        let on = -1;
+        window.addEventListener('mousedown', e => on = 1);
+        window.addEventListener('mouseup', e => on = -1);
+
+        const update = () => {
+            num += on;
+            if(num > 256) num = 256;
+            else if(num < 128) num = 128;
+            div.style.setProperty('--v', num);
+            requestAnimationFrame(update);
+        }
+        update();
+    </script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    Todo : <input type="text"> <button>등록</button>
+    <div id="con"></div>
+    <script>
+        const but = document.querySelector('button');
+        const inp = document.querySelector('input');
+        const con = document.querySelector('#con');
+    </script>
+    <script>
+        // parentElement
+        // nextElementSibling
+        // previousElementSibling
+        // firstElementChild
+        // lastElementChild
+        but.addEventListener('click', e => {
+            const div = document.createElement('div');
+            const child1 = document.createElement('span');
+            child1.textContent = inp.value;
+
+            const child2 = document.createElement('button');
+            child2.textContent = '삭제';
+            div.append(child1, child2);
+            inp.value = ''; 
+
+            con.append(div);
+        });
+
+        con.addEventListener('click', e => {
+            const tar = e.target;
+            if(!(tar instanceof HTMLButtonElement)) return;
+            tar.parentElement.remove();
+        })
+    </script>
+</body>
+</html>

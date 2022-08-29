@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            margin:0;
+            overflow: hidden;
+            height: 100vh;
+        }
+        #con{
+            --size:40px;
+            --s:0px;
+            height: 100%;
+            background-image: repeating-linear-gradient(-45deg,
+                red calc(var(--size) + var(--s)),
+                orange calc(var(--size) * 2 + var(--s)),
+                yellow calc(var(--size) * 3 + var(--s)),
+                green calc(var(--size) * 4 + var(--s)),
+                blue calc(var(--size) * 5 + var(--s)),
+                indigo calc(var(--size) * 6 + var(--s)),
+                violet calc(var(--size) * 7 + var(--s)),
+                red calc(var(--size) * 8 + var(--s))
+            );
+        }
+    </style>
+</head>
+<body>
+    <div id="con"></div>
+    <script>
+        const con = document.querySelector('div');
+        let count = 0;
+        let w  = 40;
+        const keyObj = {
+            ArrowDown: false,
+            ArrowUp: false
+        }
+        const main = (time) => {
+            count = (count + 1) % (w * 7);
+            if(keyObj.ArrowDown) w = Math.max(w - 1, 1);
+            else if(keyObj.ArrowUp) w += 1;
+            con.style.setProperty('--size', `${w}px`);
+            con.style.setProperty('--s', `${count}px`);
+            requestAnimationFrame(main);
+        }
+
+        window.addEventListener('keydown', e => {
+            if(e.code in keyObj){
+                keyObj[e.code] = true;
+            }
+        });
+        window.addEventListener('keyup', e => {
+            if(e.code in keyObj){
+                keyObj[e.code] = false;
+            }
+        });
+
+        requestAnimationFrame(main);
+    </script>
+</body>
+</html>

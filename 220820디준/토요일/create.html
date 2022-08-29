@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #con > .hello::before{
+            content:"Hello";
+        }
+    </style>
+</head>
+<body>
+    <div id="con"></div>
+    <script>
+        const con = document.querySelector('div');
+        window.addEventListener('click', e => {
+            const div = document.createElement('div');
+            div.classList.add('hello');
+            con.append(div);
+            // con.innerHTML += '<div class="hello"></div>';
+        });
+    </script>
+</body>
+</html>

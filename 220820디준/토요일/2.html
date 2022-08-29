@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            margin:0;
+            overflow: hidden;
+        }
+        #con{
+            width: 100vw;
+            height: 100vh;
+        }
+        .ball{
+            position: absolute;
+            left:0;
+            top:0;
+            --x:0;
+            --y:0;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: red;
+            transform: translate(var(--x), var(--y));
+        }
+    </style>
+</head>
+<body>
+    <div id="con"></div>
+    <script>
+        const con = document.querySelector('#con');
+        let x = 0;
+        let y = 0;
+        let dx = 1;
+        let dy = 1;
+        let count = 0;
+        const main = () => {
+            const div = document.createElement('div');
+            div.classList.add('ball');
+            div.style.setProperty('--x', `${x}px`);
+            div.style.setProperty('--y', `${y}px`);
+            x += dx;
+            y += dy;
+            if(x > innerWidth - 100){
+                x = innerWidth - 100;
+                dx = -dx;
+            } else if(x < 0){
+                x = 0;
+                dx = -dx;
+            }
+            
+            if(y > innerHeight - 100){
+                y = innerHeight - 100;
+                dy = -dy;
+            } else if(y < 0){
+                y = 0;
+                dy = -dy;
+            }
+            if(count === 100){
+                con.firstElementChild.remove();
+            } else {
+                count += 1;
+            }
+            con.append(div);
+            requestAnimationFrame(main);
+        };
+
+        requestAnimationFrame(main);
+    </script>
+</body>
+</html>

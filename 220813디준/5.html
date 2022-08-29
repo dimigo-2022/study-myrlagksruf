@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            height: 100vh;
+            overflow: hidden;
+            background-image: repeating-linear-gradient(0deg,
+                red 40px,
+                orange 80px,
+                yellow 120px,
+                green 160px,
+                blue 200px,
+                indigo 240px,
+                violet 280px,
+                red 320px);
+        }
+    </style>
+</head>
+<body>
+    <script>
+        window.addEventListener('click', e => way = -way + 1);
+        let deg = 0;
+        let way = 1;
+        const main = () => {
+            document.body.style.backgroundImage = `repeating-linear-gradient(${deg}deg,
+                red 40px,
+                orange 80px,
+                yellow 120px,
+                green 160px,
+                blue 200px,
+                indigo 240px,
+                violet 280px,
+                red 320px)`;
+            deg += way;
+            requestAnimationFrame(main);
+        };
+
+        requestAnimationFrame(main);
+    </script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            margin:0;
+            overflow: hidden;
+        }
+        div{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            border-radius: 50%;
+            --x:0;
+            --y:0;
+            transform: translate(var(--x), calc(100vh - var(--y) - 100px));
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+    <script>
+        const div = document.querySelector('div');
+        const obj = {
+            ArrowLeft:0,
+            ArrowRight:0,
+        };
+        let x = 0;
+        let y = 0;
+        const A = 200;
+        const B = 200;
+        const C = A / (B * 2 + 1) ** 2;
+        const g = (x) => C * (- ((x % (B * 4 + 3) - (B * 2 + 1)) ** 2) + (B * 2 + 1) ** 2);
+        window.addEventListener('keydown', e => {
+            if(!(e.code in obj)) return;
+            obj[e.code] = 5;
+        });
+        window.addEventListener('keyup', e => {
+            if(!(e.code in obj)) return;
+            obj[e.code] = 0;
+        });
+        const update = (time) => {
+            x += obj.ArrowRight - obj.ArrowLeft;
+            y = g(time);
+            div.style.setProperty('--x', `${x}px`);
+            div.style.setProperty('--y', `${y}px`);
+            requestAnimationFrame(update);
+        };
+
+        requestAnimationFrame(update);
+    </script>
+</body>
+</html>

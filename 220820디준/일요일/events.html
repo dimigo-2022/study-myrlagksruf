@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <input id="x1" type="number">
+        <input id="x2" type="number">
+        <input id="x3" type="number">
+    </div>
+    <div id="result"></div>
+    <script>
+        const x1 = document.querySelector('#x1');
+        const x2 = document.querySelector('#x2');
+        const x3 = document.querySelector('#x3');
+        const div = document.querySelector('div');
+        const res = document.querySelector('#result');
+
+        div.addEventListener('input', e => {
+            res.innerHTML = x1.valueAsNumber + x2.valueAsNumber + x3.valueAsNumber;
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // on이벤트 절대 쓰지 말 것
+        // 한동안 되도록 document.querySelector는 태그만 쓸 것 (document.querySelector('button'))
+
+        // 전체 이벤트
+        // addEventListner를 쓸 때는 이벤트 명에서 on은 제외한 문자열이다.
+        window.addEventListener('click', event => {
+            // event.target         : 이벤트가 발생한 곳
+            // event.currentTarget  : 이벤트가 등록된 곳
+        });
+
+
+
+        // {
+        //     // addEventListener(type, call)
+        //     if(type === 'click'){
+        //         // ....
+        //         const Event = new MouseEvent()
+        //         call(Event);
+        //     }
+        // }
+
+        // 함수 정의 방법
+        // let nameAlert = (call) => {
+        //     // 코드블럭
+        //     call();
+        // };
+
+        // let sayHello = () => {
+        //     alert('Hello');
+        // }
+        // nameAlert(sayHello);
+
+        let calc = (a, b, callback) => {
+            console.log(`시작 <${callback(a, b)}> 끝`);
+        };
+
+        // return은 없으면 undefined가 결과값
+        // return은 함수를 끝낸다.
+        let add = (c, d) => {
+            return c + d;
+            console.log('이게 출력이 될까요?');
+        };
+
+        let mul = (c, d) => c * d;
+
+        calc(10, 20, add);
+
+        calc(10, 30, mul);
+
+        calc(10, 5, (a, b) => a ** b);
+    </script>
+</body>
+</html>
