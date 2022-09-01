@@ -72,10 +72,9 @@ function init(){
         }
         document.body.style.cursor = 'default';
     });
-    window.addEventListener('mousemove', mouseMove);
-    window.addEventListener('touchmove', mouseMove);
-    window.addEventListener('click', clickFun);
-    window.addEventListener('touchstart', clickFun);
+
+    window.addEventListener('pointermove', mouseMove);
+    window.addEventListener('pointerdown', clickFun);
 }
 
 export default init;
