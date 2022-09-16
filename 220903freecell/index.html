@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./index.js" type="module" defer></script>
+    <style>
+        body{
+            max-width: 900px;
+            overflow: hidden;
+            margin: auto;
+        }
+        #header{
+            display: flex;  
+        }
+
+        #header > div{
+            height: 150px;
+            width: 100px;
+            box-sizing: border-box;
+            border:2px solid black;
+        }
+
+        #header > div:nth-child(5){
+            border: none;
+        }
+
+        #container{
+            display: flex;
+            justify-content: space-around;
+            align-items: stretch;
+        }
+        #container > div{
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .card{
+            width: 100px;
+            height: 150px;
+            background-image: url('./com.png');
+            background-size: 1300% 400%;
+            transition: 0.3s;
+        }
+
+
+        #header > .left{
+            background-color: green;
+        }
+
+        .card.selected{
+            filter:invert(1);
+        }
+    </style>
+</head>
+<body>
+    <div id="header">
+        <div class="left"></div>
+        <div class="left"></div>
+        <div class="left"></div>
+        <div class="left"></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    <div id="container">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,1 @@
+Data_Root=["C:\\Users\\myrla\\study-myrlagksruf\\220903freecell","C:\\Users\\myrla\\study-myrlagksruf\\220827디준"]

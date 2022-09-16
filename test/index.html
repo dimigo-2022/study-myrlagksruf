@@ -1,28 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>지식백과</title>
     <style>
-        .card{
-            width: 100px;
-            height: 150px;
-            background-image: url('./com.png');
-            background-size: 1300% 400%;
+        body {
+            background-color: beige;
         }
-        /* .c1{
-            background-position-x: 0;
+
+        h2:active {
+            color: red;
         }
-        .c2{
-            background-position-x: calc(100% / 12 * 1);
-        } */
+
+        h2 {
+            color: rgb(81, 22, 175);
+            border-bottom: 2px solid rgb(200, 0, 0);
+        }
+        .bor{
+            border-bottom: 2px solid rgb(200, 200, 200);
+        }
+        .obor{
+            border-bottom: 2px solid rgb(200,200,200);
+            border-top: 2px solid rgb(200,200,200);
+        }
+        .b {
+            color: blue;
+            font-size:25px;
+        }
+        .onb{
+            color:blue;
+        }
+        .gw {
+            color: gray;
+        }
+
+        .bw {
+            color: blue;
+        }
+
+        p {
+            border: 0.1px solid grey;
+        }
     </style>
-    <script src="./index.js" type="module" defer></script>
 </head>
+
 <body>
-    <div class="card"></div>
-    <button>눌러</button>
+    <p>
+    <div class="gw">namu.wiki > html</div>
+    <h2>HTML - 나무위키</h2>
+    하위문서:HTML/태그 1.개요 2.설명 3. 태그 4. 버전 5. HTML 문서 저장 방법 6. 트랜스컴파일러 7. 외부 링크 Hello,<br>
+    world! Hello,
+    world! [1] 마셜제도 에서 팀 버너스리 경을... 웹사이트에서 흔히 볼 수 있는 htm이나 html 확장자가 바<br>
+    로 이 언어로 작성된 문서다. 최초 제안자는 CERN의 물리학자 티머시 J. 버너스리이다. URL, HTTP, WWW의 전신인<br>
+    Enquire 등도 그가...
+    </p>
+    <p>
+    <h1>지식백과</h1>
+    <span class="b">HTML </span><span class="gw">HyperText Markup Language</span><br>
+    <a href="https://terms.naver.com/entry.naver?docId=1168097&cid=40942&categoryId=32838%22%3E"><h2 class="obor">웹 문서를 만들기 위하여 사용하는 기본적인 웹 언어의 한 종류</h2></a>
+    웹 문서를 만들기 위하여 사용하는 기본적인 웹 언어의 한 종류이다. 하이퍼텍스트를 작성하기 위해 개발되었다. 인터<br>
+    넷 서비스의 하나인 월드 와이드 웹을 통해 볼 수 있는 문서를 만들 때 사용하는 웹 언어의 한 종류이다. 특히 하이퍼<br>
+    텍스트를 작성하기 위해 개발되었으며, 인터넷에서 웹을 통해 접근되는 대부분의 웹 페이지들은 HTML로 작성된다. <br>
+    HTML은 문서의 글자크기, 글자색, 글자모양, 그래픽, 문서이동(하이퍼링크) 등을 정의하...<br>
+    <div class="gw">-두산백과-</div>
+
+    </p>
 </body>
+
 </html>

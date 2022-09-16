@@ -1,0 +1,9 @@
+<header>
+    sibal
+</header>
+<main>
+    <slot></slot>
+</main>
+<footer>
+    @Copyright
+</footer>
