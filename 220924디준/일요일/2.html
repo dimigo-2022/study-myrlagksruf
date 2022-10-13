@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div > div{
+            height: 50px;
+            transition: 0.3s;
+        }
+        .active{
+            background-color: orangered;
+        }
+    </style>
+</head>
+<body>
+    <input type="number" min="0" step="1" required>
+    <div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    <!-- :nth-child, >, % -->
+    <script>
+        let input = document.querySelector('input');
+
+        input.addEventListener('input', e => {
+            if(!input.validity.valid) return;
+            let act = document.querySelector('.active');
+            if(act){
+                act.classList.remove('active');
+            }
+            let div = document.querySelector(`div>div:nth-child(${input.value % 10 + 1})`);
+            div.classList.add('active');
+        });
+    </script>
+</body>
+</html>

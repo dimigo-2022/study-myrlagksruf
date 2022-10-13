@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            margin: 0;
+            overflow: hidden;
+        }
+        .container{
+            display: flex;
+            flex-wrap: wrap;
+            filter: opacity(100%);
+        }
+        .container.stop{
+            transition: 1s;
+            filter: opacity(0);
+        }
+        .container > div{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-basis: 20%;
+            height: 20vh;
+        }
+    </style>
+</head>
+<body>
+    <div class="container"></div>
+    <script>
+        let container = document.querySelector('div');
+        addEventListener('keydown', e => {
+            if(container.classList.contains('stop')) return;
+            let div = document.createElement('div');
+            div.innerHTML = e.code;
+            console.log(Math.floor(Math.random() * 256 ** 3).toString().padStart(6, '0'));
+            div.style.backgroundColor = `#${Math.floor(Math.random() * 256 ** 3).toString(16).padStart(6, '0')}`;
+            container.append(div);
+            if(container.childElementCount === 25){
+                container.classList.add('stop');
+            }
+        });
+
+        container.addEventListener('transitionend', e => {
+            container.innerHTML = '';
+            container.classList.remove('stop');
+        });
+    </script>
+</body>
+</html>

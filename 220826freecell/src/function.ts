@@ -68,6 +68,10 @@ export function isPosible(pick:HTMLElement, target:HTMLElement){
     return false;
 }
 
+// hold 부분에 남아있는 공간이 있는지 확인
+// pick한 카드를 복제해서 남아있는 공간에 넣기
+// pick한 카드 지우기
+// pick 초기화
 export function goLeft(pick:HTMLDivElement, dest:HTMLDivElement){
     if(!(dest && !dest.dataset.num && (!pick.closest('main') || pick.parentElement.lastChild === pick))) return;
     toTrump(dest, getTrumpInfo(Number(pick.dataset.num)));

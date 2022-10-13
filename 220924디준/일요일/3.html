@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table{
+            border-collapse: collapse;
+        }
+        td{
+            width:20px;
+            height: 20px;
+            border:2px solid black;
+            transition: 0.3s;
+        }
+        .char{
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <button data-x="-1" data-y="0">왼쪽</button>
+        <button data-x="1" data-y="0">오른쪽</button>
+        <button data-x="0" data-y="-1">위</button>
+        <button data-x="0" data-y="1">아래</button>
+    </div>
+    <table>
+        <tr data-y="1">
+            <td data-x="1"></td>
+            <td data-x="2"></td>
+            <td data-x="3"></td>
+            <td data-x="4"></td>
+            <td data-x="5"></td>
+            <td data-x="6"></td>
+            <td data-x="7"></td>
+            <td data-x="8"></td>
+            <td data-x="9"></td>
+            <td data-x="10"></td>
+        </tr>
+        <tr data-y="2">
+            <td data-x="1"></td>
+            <td data-x="2"></td>
+            <td data-x="3"></td>
+            <td data-x="4"></td>
+            <td data-x="5"></td>
+            <td data-x="6"></td>
+            <td data-x="7"></td>
+            <td data-x="8"></td>
+            <td data-x="9"></td>
+            <td data-x="10"></td>
+        </tr>
+        <tr data-y="3">
+            <td data-x="1"></td>
+            <td data-x="2"></td>
+            <td data-x="3"></td>
+            <td data-x="4"></td>
+            <td data-x="5"></td>
+            <td data-x="6"></td>
+            <td data-x="7"></td>
+            <td data-x="8"></td>
+            <td data-x="9"></td>
+            <td data-x="10"></td>
+        </tr>
+        <tr data-y="4">
+            <td data-x="1"></td>
+            <td data-x="2"></td>
+            <td data-x="3"></td>
+            <td data-x="4"></td>
+            <td data-x="5"></td>
+            <td data-x="6"></td>
+            <td data-x="7"></td>
+            <td data-x="8"></td>
+            <td data-x="9"></td>
+            <td data-x="10"></td>
+        </tr>
+        <tr data-y="5">
+            <td data-x="1"></td>
+            <td data-x="2"></td>
+            <td data-x="3"></td>
+            <td data-x="4"></td>
+            <td data-x="5" class="char"></td>
+            <td data-x="6"></td>
+            <td data-x="7"></td>
+            <td data-x="8"></td>
+            <td data-x="9"></td>
+            <td data-x="10"></td>
+        </tr>
+        <tr data-y="6">
+            <td data-x="1"></td>
+            <td data-x="2"></td>
+            <td data-x="3"></td>
+            <td data-x="4"></td>
+            <td data-x="5"></td>
+            <td data-x="6"></td>
+            <td data-x="7"></td>
+            <td data-x="8"></td>
+            <td data-x="9"></td>
+            <td data-x="10"></td>
+        </tr>
+        <tr data-y="7">
+            <td data-x="1"></td>
+            <td data-x="2"></td>
+            <td data-x="3"></td>
+            <td data-x="4"></td>
+            <td data-x="5"></td>
+            <td data-x="6"></td>
+            <td data-x="7"></td>
+            <td data-x="8"></td>
+            <td data-x="9"></td>
+            <td data-x="10"></td>
+        </tr>
+        <tr data-y="8">
+            <td data-x="1"></td>
+            <td data-x="2"></td>
+            <td data-x="3"></td>
+            <td data-x="4"></td>
+            <td data-x="5"></td>
+            <td data-x="6"></td>
+            <td data-x="7"></td>
+            <td data-x="8"></td>
+            <td data-x="9"></td>
+            <td data-x="10"></td>
+        </tr>
+        <tr data-y="9">
+            <td data-x="1"></td>
+            <td data-x="2"></td>
+            <td data-x="3"></td>
+            <td data-x="4"></td>
+            <td data-x="5"></td>
+            <td data-x="6"></td>
+            <td data-x="7"></td>
+            <td data-x="8"></td>
+            <td data-x="9"></td>
+            <td data-x="10"></td>
+        </tr>
+        <tr data-y="10">
+            <td data-x="1"></td>
+            <td data-x="2"></td>
+            <td data-x="3"></td>
+            <td data-x="4"></td>
+            <td data-x="5"></td>
+            <td data-x="6"></td>
+            <td data-x="7"></td>
+            <td data-x="8"></td>
+            <td data-x="9"></td>
+            <td data-x="10"></td>
+        </tr>
+    </table>
+    <script>
+        let x = 5;
+        let y = 5;
+        let div = document.querySelector('div');
+        div.addEventListener('click', e => {
+            if(!(e.target instanceof HTMLButtonElement)) return;
+            let tx = x + Number(e.target.dataset.x);
+            let ty = y + Number(e.target.dataset.y);
+            let td = document.querySelector(`tr[data-y="${ty}"]>td[data-x="${tx}"]`);
+            if(td){
+                let char = document.querySelector('.char');
+                char.classList.remove('char');
+                td.classList.add('char');
+                x = tx;
+                y = ty;
+            }
+        });
+    </script>
+</body>
+</html>

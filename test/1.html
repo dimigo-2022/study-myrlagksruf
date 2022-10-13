@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            position: absolute;
+            width:100px;
+            height: 100px;
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div style="left:0; top:0"></div>
+    <script>
+        let div = document.querySelector('div');
+        let obj = {
+            ArrowLeft: 0,
+            ArrowRight: 0,
+            ArrowUp: 0,
+            ArrowDown: 0,
+        };
+
+        window.addEventListener('keydown', e => {
+            if(e.code in obj){
+                obj[e.code] = 1;
+                console.log(obj);
+            }
+        });
+
+        window.addEventListener('keyup', e => {
+            if(e.code in obj){
+                obj[e.code] = 0;
+                console.log(obj);
+            }
+        });
+
+        let loop = () => {
+            div.style.left = `${parseFloat(div.style.left) + obj.ArrowRight - obj.ArrowLeft}px`;
+            div.style.top = `${parseFloat(div.style.top) + obj.ArrowDown - obj.ArrowUp}px`;
+            requestAnimationFrame(loop);
+        };
+
+        loop();
+    </script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button>Hello</button>
+    <script>
+        // 속성 : 객체 안의 변수, 메소드 : 객체 안의 함수
+        // 속성, 메소드를 제외한 나머지 값들은 callByValue이다.
+        // window : 브라우저의 정보 혹은 다루는 도구가 담겨있는 객체
+        // document : HTML CSS의 정보 혹은 다루는 도구가 담겨있는 객체
+        let button = document.querySelector('button');
+        
+        let clickFun = () => {
+            alert(button.innerHTML);
+        };
+
+        button.addEventListener('click', clickFun)      // 1
+    </script>
+</body>
+</html>

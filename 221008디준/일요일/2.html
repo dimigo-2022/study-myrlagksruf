@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            margin: 0;
+            overflow: hidden;
+        }
+        .container{
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .container > div{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-basis: 20%;
+            height: 20vh;
+        }
+    </style>
+</head>
+<body>
+    <div class="container"></div>
+    <script>
+        let container = document.querySelector('div');
+        addEventListener('keydown', e => {
+            if(container.classList.contains('stop')) return;
+            let div = document.createElement('div');
+            div.innerHTML = e.code;
+            console.log(Math.floor(Math.random() * 256 ** 3).toString().padStart(6, '0'));
+            div.style.backgroundColor = `#${Math.floor(Math.random() * 256 ** 3).toString(16).padStart(6, '0')}`;
+            container.append(div);
+            if(container.childElementCount === 25){
+                container.classList.add('stop');
+            }
+        });
+
+        let op = 100;
+        let loop = () => {  
+            if(container.childElementCount === 25){
+                op--;
+                container.style.filter = `opacity(${op}%)`;
+                if(op === 0){
+                    container.style.filter = 'opacity(100%)';
+                    op = 100;
+                    container.classList.remove('stop');
+                    container.innerHTML = '';
+                }
+            }
+            requestAnimationFrame(loop);
+        };
+
+        loop();
+    </script>
+</body>
+</html>

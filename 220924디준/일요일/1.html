@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div > div{
+            height: 50px;
+            transition: 0.3s;
+        }
+        .active{
+            background-color: orangered;
+        }
+    </style>
+</head>
+<body>
+    <input type="number" min="0" max="9" step="1" required>
+    <div>
+        <div class="a0"></div>
+        <div class="a1"></div>
+        <div class="a2"></div>
+        <div class="a3"></div>
+        <div class="a4"></div>
+        <div class="a5"></div>
+        <div class="a6"></div>
+        <div class="a7"></div>
+        <div class="a8"></div>
+        <div class="a9"></div>
+    </div>
+    <script>
+        let input = document.querySelector('input');
+        input.addEventListener('input', e => {
+            if(!input.validity.valid) return;
+            let active = document.querySelector('.active');
+            if(active){
+                active.classList.remove('active');
+            }
+
+            let div = document.querySelector(`div.a${input.value}`);
+            div.classList.add('active');
+            // 0을 적으면 class가 a0인 div태그를 받아와서 active라는 클래스가 추가
+            // 다음에 1을 적으면 원래 active는 없애고, 1에 active를 줌
+        });
+    </script>
+</body>
+</html>

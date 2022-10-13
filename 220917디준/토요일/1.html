@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            margin:0;
+        }
+        #con{
+            width:100%;
+            font-size: 32px;
+        }
+        #con > div{
+            display: inline-block;
+        }
+        #con > div::after{
+            content: "　";
+        }
+    </style>
+</head>
+<body>
+    <input type="number" name="" id="">
+    <button>1씩 증가</button>
+    <div id="con"></div>
+    <script>
+        const con = document.querySelector('#con');
+        const but = document.querySelector('button');
+        for(let i = 0; i < 100; i++){
+            const div = document.createElement('div');
+            div.innerHTML = i;
+            con.append(div);
+        }
+
+        // scope
+        but.addEventListener('click', e => {
+            for(let n = 1; n <= 100; n++){
+                let div = document.querySelector(`#con > div:nth-child(${n})`);
+                div.innerHTML = Number(div.innerHTML) + 1;
+            }
+        });
+    </script>
+</body>
+</html>

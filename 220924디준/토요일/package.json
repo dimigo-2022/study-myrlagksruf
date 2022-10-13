@@ -1,0 +1,16 @@
+{
+  "name": "ffmpeg-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "4.js",
+  "type": "module",
+  "scripts": {
+    "start": "node 4.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^18.7.20"
+  }
+}

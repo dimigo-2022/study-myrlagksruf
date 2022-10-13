@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            margin: 0;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        table{
+            border-collapse: collapse;
+        }
+        td{
+            width:50px;
+            height: 50px;
+            border:1px solid black;
+            transition: 0.3s;
+        }
+        .char{
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <tbody>
+            
+        </tbody>
+    </table>
+    <script>
+        const tbody = document.querySelector('tbody');
+        const map = [];
+        const obj = {
+            ArrowLeft:[-1, 0],
+            ArrowRight:[1, 0],
+            ArrowUp:[0, -1],
+            ArrowDown:[0, 1],
+        };
+        const char = [3, 3];
+        const arr = [4, 6, 10, 4, 3, 2, 1, 3, 5, 10];
+        for(let i = 0; i < 10; i++){
+            map[i] = [];
+            const tr = document.createElement('tr');
+            for(let j = 0; j < arr[i]; j++){
+                const td = document.createElement('td');
+                tr.append(td);
+                if(i === char[1] && j === char[0]) td.classList.add('char');
+                map[i][j] = td;
+            }
+            tbody.append(tr);
+        }
+        addEventListener('keydown', e => {
+            if(!(e.code in obj)) return;
+            let x = char[0] + obj[e.code][0];
+            let y = char[1] + obj[e.code][1];
+            // if(x < 0 || x >= map.length) return;
+            if(!(y in map) || !(x in map[y])) return;
+            map[y][x].classList.add('char');
+            map[char[1]][char[0]].classList.remove('char');
+            char[0] = x;
+            char[1] = y;
+        });
+    </script>
+</body>
+</html>

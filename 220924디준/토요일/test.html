@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button>버튼</button>
+    <div class="con">
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+    </div>
+    <script>
+        let button = document.querySelector('button');
+
+        // []접근이 가능
+        // for문을 쓸 때 of 문이 가능하다.
+        // array-like 객체
+        let conChil = document.querySelectorAll('.con > div');
+        let con = document.querySelector('.con');
+        button.addEventListener('click', e => {
+            for(let i of conChil){
+                i.innerHTML = Number(i.innerHTML) + 1;
+            }
+            let div = document.createElement('div');
+            div.innerHTML = '0';
+            con.append(div);
+        });
+    </script>
+</body>
+</html>
